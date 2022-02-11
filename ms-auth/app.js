@@ -8,7 +8,7 @@ const db = require('diskdb');
 const userRoutes = require('./api/routes/users');
 
 //connect DB
-db.connect('./data', ['users']);
+db.connect('../data', ['users']);
 
 app.use(morgan("dev"));
 app.use('/uploads', express.static('uploads'));
