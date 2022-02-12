@@ -3,6 +3,7 @@ package repositories
 import (
 	"crypto/tls"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"ms-fetch/domain/interfaces"
 	"ms-fetch/domain/models"
@@ -12,19 +13,21 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-type EfiseryRepository struct {
-	HostEfisery string
+type RestCurrConvRepository struct {
+	HostCurrConv   string
+	ApikeyCurrConv string
 }
 
-func NewEfiseryRepo(hostEfisery string) interfaces.IEfiseryRepository {
-	return &EfiseryRepository{
-		HostEfisery: hostEfisery,
+func NewRestCurrConvRepo(hostCurrConv string, apikeyCurrConv string) interfaces.IRestCurrConvRepository {
+	return &RestCurrConvRepository{
+		HostCurrConv:   hostCurrConv,
+		ApikeyCurrConv: apikeyCurrConv,
 	}
 }
 
-func (repo EfiseryRepository) GetResource() (model []models.EfiseryResource, err error) {
+func (repo RestCurrConvRepository) GetIDRtoUSD() (model models.Currency, err error) {
 
-	url := repo.HostEfisery + "/v1/storages/5e1edf521073e315924ceab4/list"
+	url := fmt.Sprintf("%s/api/v7/convert?q=IDR_USD&compact=ultra&apiKey=%s", repo.HostCurrConv, repo.ApikeyCurrConv)
 
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {

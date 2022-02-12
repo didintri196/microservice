@@ -2,6 +2,6 @@ package interfaces
 
 import "ms-fetch/domain/models"
 
-type IEfiseryRepository interface {
+type IRestEfiseryRepository interface {
 	GetResource() ([]models.EfiseryResource, error)
 }

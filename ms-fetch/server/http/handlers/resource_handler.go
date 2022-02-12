@@ -16,7 +16,7 @@ func NewResourceHandler(handler Handler) ResourceHandler {
 	return ResourceHandler{handler}
 }
 
-func (handler ResourceHandler) GetCurrentResource(ctx *fiber.Ctx) error {
+func (handler ResourceHandler) GetResource(ctx *fiber.Ctx) error {
 	// database processing
 	uc := usecase.NewResourceUseCase(handler.Contract)
 	data, err := uc.ReadResouce()
@@ -24,4 +24,14 @@ func (handler ResourceHandler) GetCurrentResource(ctx *fiber.Ctx) error {
 		return handler.SendResponseWithoutMeta(ctx, err.Error(), nil, http.StatusUnprocessableEntity)
 	}
 	return handler.SendResponseWithoutMeta(ctx, messages.SuccessMessage, data.FilterResourcePresenter, http.StatusOK)
+}
+
+func (handler ResourceHandler) GetResourceWithUSD(ctx *fiber.Ctx) error {
+	// database processing
+	uc := usecase.NewResourceUseCase(handler.Contract)
+	data, err := uc.ReadResouceUsingCurrUSD()
+	if err != nil {
+		return handler.SendResponseWithoutMeta(ctx, err.Error(), nil, http.StatusUnprocessableEntity)
+	}
+	return handler.SendResponseWithoutMeta(ctx, messages.SuccessMessage, data.FilterResourceCurrUSDPresenter, http.StatusOK)
 }

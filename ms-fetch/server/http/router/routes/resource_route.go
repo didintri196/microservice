@@ -27,6 +27,7 @@ func (route ResourceRoute) RegisterRoute() {
 
 	// Resource Route
 	fetchRoute.Use(jwtMiddleware.RoleBiasaOnly)
-	fetchRoute.Get("", resourceHandler.GetCurrentResource)
+	fetchRoute.Get("", resourceHandler.GetResource)
+	fetchRoute.Get("/currency-usd", resourceHandler.GetResourceWithUSD)
 
 }

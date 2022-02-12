@@ -6,5 +6,8 @@ const (
 
 	EnvironmentJWTSecretKey = "JWT_SECRET_KEY"
 
-	EnvironmentHostEfisery = "HOST_EFISERY"
+	EnvironmentHostEfisery  = "HOST_EFISERY"
+	EnvironmentHostCurrConv = "HOST_CURRCONV"
+
+	EnvironmentApiKeyCurrConv = "API_KEY_CURRCONV"
 )

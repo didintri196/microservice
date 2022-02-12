@@ -9,7 +9,6 @@ import (
 )
 
 func main() {
-
 	// Load Configuration
 	config, err := domain.LoadConfiguration()
 	if err != nil {
@@ -21,7 +20,12 @@ func main() {
 		App:       config.App,
 		Validator: config.Validator,
 		JwtSecret: config.JwtSecret,
-		Host:      struct{ Efisery string }{Efisery: config.HostEfisery},
+		Cache:     config.Cache,
+		Host: struct {
+			Efisery  string
+			CurrConv string
+		}{Efisery: config.HostEfisery, CurrConv: config.HostCurrConv},
+		Apikey: struct{ CurrConv string }{CurrConv: config.ApikeyCurrConv},
 	}) // Register routes
 	router.NewRouter(handler).RegisterRoutes()
 

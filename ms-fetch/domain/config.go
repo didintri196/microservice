@@ -3,6 +3,9 @@ package domain
 import (
 	"ms-fetch/domain/constants"
 	"os"
+	"time"
+
+	"github.com/patrickmn/go-cache"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
@@ -10,10 +13,13 @@ import (
 )
 
 type Config struct {
-	App         *fiber.App
-	Validator   *validator.Validate
-	JwtSecret   string
-	HostEfisery string
+	App            *fiber.App
+	Validator      *validator.Validate
+	JwtSecret      string
+	HostEfisery    string
+	HostCurrConv   string
+	ApikeyCurrConv string
+	Cache          *cache.Cache
 }
 
 func LoadConfiguration() (config Config, err error) {
@@ -27,12 +33,20 @@ func LoadConfiguration() (config Config, err error) {
 
 	// host
 	config.HostEfisery = os.Getenv(constants.EnvironmentHostEfisery)
+	config.HostCurrConv = os.Getenv(constants.EnvironmentHostCurrConv)
+
+	// api key
+	config.ApikeyCurrConv = os.Getenv(constants.EnvironmentApiKeyCurrConv)
 
 	// validator
 	config.Validator = validator.New()
 
 	// fiber
 	config.App = fiber.New()
+
+	//cache
+	config.Cache = cache.New(5*time.Minute, 10*time.Minute)
+
 	return config, err
 }
 
