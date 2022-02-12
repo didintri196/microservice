@@ -2,10 +2,6 @@ const db = require('diskdb');
 
 class UsersRepository {
     
-    // async getAllUsers(){
-    //     return await this.model.find({});
-    // }
-
     getUserByPhonePassword(phone, password){
         return db.users.find({phone: phone, password: password});
     }
@@ -22,13 +18,6 @@ class UsersRepository {
         return true;
     }
 
-    // async updateUser(id, user){
-    //     return await this.model.findByIdAndUpdate(id, user);
-    // }
-
-    // async deleteUser(id){
-    //     return await this.model.findByIdAndDelete(id);
-    // }
 }
 
 module.exports = new UsersRepository();
