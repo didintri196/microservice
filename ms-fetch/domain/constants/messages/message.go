@@ -9,7 +9,7 @@ const (
 	ApiKeyIsNotValidMessage                  = "apikey is not valid"
 	CredentialIsNotMatchMessage              = "credential is not match"
 	AccountIsNotVerifiedMessage              = "your account is not verified yet"
-	AccountIsNotUserRole                     = "your account cannot access the user page"
+	AccountIsNotBiasaRole                    = "your account cannot access the biasa page"
 	AccountIsNotAdminRole                    = "your account cannot access the admin page"
 	TokenIsExpiredMessage                    = "token is expired, please re-login or revoke token with refresh token"
 	JWTSecretKeyIsMissingMessage             = "please provide the jwt secret key in the environment"

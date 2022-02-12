@@ -1,0 +1,32 @@
+package routes
+
+import (
+	"ms-fetch/server/http/handlers"
+	"ms-fetch/server/http/middlewares"
+
+	"github.com/gofiber/fiber/v2"
+)
+
+type ResourceRoute struct {
+	RouteGroup fiber.Router
+	Handler    handlers.Handler
+}
+
+func NewResourceRoute(routeGroup fiber.Router, handler handlers.Handler) ResourceRoute {
+	return ResourceRoute{RouteGroup: routeGroup, Handler: handler}
+}
+
+func (route ResourceRoute) RegisterRoute() {
+
+	// init
+	fetchRoute := route.RouteGroup.Group("/resource")
+	jwtMiddleware := middlewares.NewJWTMiddleware(route.Handler.Contract)
+
+	// handlers
+	resourceHandler := handlers.NewResourceHandler(route.Handler)
+
+	// Resource Route
+	fetchRoute.Use(jwtMiddleware.RoleBiasaOnly)
+	fetchRoute.Get("", resourceHandler.GetCurrentResource)
+
+}

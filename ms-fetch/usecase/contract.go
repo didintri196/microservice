@@ -8,7 +8,6 @@ import (
 type Contract struct {
 	Auth struct {
 		UserName  string
-		UserEmail string
 		UserPhone string
 		UserRole  string
 	}

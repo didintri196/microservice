@@ -12,6 +12,7 @@ import (
 type Config struct {
 	App       *fiber.App
 	Validator *validator.Validate
+	JwtSecret string
 }
 
 func LoadConfiguration() (config Config, err error) {
@@ -19,6 +20,9 @@ func LoadConfiguration() (config Config, err error) {
 	if err = godotenv.Load(constants.EnvironmentDirectory); err != nil {
 		return config, err
 	}
+
+	// jwt
+	config.JwtSecret = os.Getenv(constants.EnvironmentJWTSecretKey)
 
 	// validator
 	config.Validator = validator.New()
