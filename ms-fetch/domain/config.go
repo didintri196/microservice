@@ -10,9 +10,10 @@ import (
 )
 
 type Config struct {
-	App       *fiber.App
-	Validator *validator.Validate
-	JwtSecret string
+	App         *fiber.App
+	Validator   *validator.Validate
+	JwtSecret   string
+	HostEfisery string
 }
 
 func LoadConfiguration() (config Config, err error) {
@@ -23,6 +24,9 @@ func LoadConfiguration() (config Config, err error) {
 
 	// jwt
 	config.JwtSecret = os.Getenv(constants.EnvironmentJWTSecretKey)
+
+	// host
+	config.HostEfisery = os.Getenv(constants.EnvironmentHostEfisery)
 
 	// validator
 	config.Validator = validator.New()

@@ -11,6 +11,9 @@ type Contract struct {
 		UserPhone string
 		UserRole  string
 	}
+	Host struct {
+		Efisery string
+	}
 	App       *fiber.App
 	Validator *validator.Validate
 	JwtSecret string

@@ -17,13 +17,12 @@ func main() {
 	}
 
 	// Insert Handler Contract
-	handler := handlers.NewHandler(&usecase.Contract{
+	var handler = handlers.NewHandler(&usecase.Contract{
 		App:       config.App,
 		Validator: config.Validator,
 		JwtSecret: config.JwtSecret,
-	})
-
-	// Register routes
+		Host:      struct{ Efisery string }{Efisery: config.HostEfisery},
+	}) // Register routes
 	router.NewRouter(handler).RegisterRoutes()
 
 	// Listening Http
