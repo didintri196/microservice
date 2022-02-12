@@ -54,4 +54,8 @@ func (router Router) RegisterRoutes() {
 	resourceRoute := routes.NewResourceRoute(rootGroup, router.Handler)
 	resourceRoute.RegisterRoute()
 
+	// Users route
+	usersRoute := routes.NewUsersRoute(rootGroup, router.Handler)
+	usersRoute.RegisterRoute()
+
 }

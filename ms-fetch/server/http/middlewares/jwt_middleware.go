@@ -121,3 +121,13 @@ func (middleware JWTMiddleware) RoleAdminOnly(ctx *fiber.Ctx) error {
 
 	return ctx.Next()
 }
+
+func (middleware JWTMiddleware) RoleBebas(ctx *fiber.Ctx) error {
+
+	// validate
+	if err := middleware.validate(ctx); err != nil {
+		return handlers.NewHandler(middleware.Contract).SendResponseWithoutMeta(ctx, err.Error(), nil, http.StatusUnauthorized)
+	}
+
+	return ctx.Next()
+}
