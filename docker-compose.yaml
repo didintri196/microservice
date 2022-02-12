@@ -9,7 +9,17 @@ services:
       context: ./ms-auth
       dockerfile: Dockerfile
     ports:
-      - "3000:5000"
+      - "3000:3000"
     restart: always
     env_file:
       - ./ms-auth/.env
+
+  ms-fetch:
+    build:
+      context: ./ms-fetch
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    restart: always
+    env_file:
+      - ./ms-fetch/.env
