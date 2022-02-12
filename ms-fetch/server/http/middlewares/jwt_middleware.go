@@ -115,7 +115,7 @@ func (middleware JWTMiddleware) RoleAdminOnly(ctx *fiber.Ctx) error {
 	}
 
 	// user must be admin
-	if middleware.Contract.Auth.UserRole != constants.RoleBiasa {
+	if middleware.Contract.Auth.UserRole != constants.RoleAdmin {
 		return handlers.NewHandler(middleware.Contract).SendResponseWithoutMeta(ctx, messages.AccountIsNotAdminRole, nil, http.StatusForbidden)
 	}
 

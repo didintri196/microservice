@@ -19,15 +19,18 @@ func NewResourceRoute(routeGroup fiber.Router, handler handlers.Handler) Resourc
 func (route ResourceRoute) RegisterRoute() {
 
 	// init
-	fetchRoute := route.RouteGroup.Group("/resource")
 	jwtMiddleware := middlewares.NewJWTMiddleware(route.Handler.Contract)
+
+	fetchRouteBiasa := route.RouteGroup.Group("/user/resource").Use(jwtMiddleware.RoleBiasaOnly)
+	fetchRouteAdmin := route.RouteGroup.Group("/admin/resource").Use(jwtMiddleware.RoleAdminOnly)
 
 	// handlers
 	resourceHandler := handlers.NewResourceHandler(route.Handler)
 
 	// Resource Route
-	fetchRoute.Use(jwtMiddleware.RoleBiasaOnly)
-	fetchRoute.Get("", resourceHandler.GetResource)
-	fetchRoute.Get("/currency-usd", resourceHandler.GetResourceWithUSD)
+	fetchRouteBiasa.Get("", resourceHandler.GetResource)
+	fetchRouteBiasa.Get("/currency-usd", resourceHandler.GetResourceWithUSD)
+
+	fetchRouteAdmin.Get("/report-weekly", resourceHandler.GetReportWeekResource)
 
 }

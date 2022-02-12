@@ -35,3 +35,13 @@ func (handler ResourceHandler) GetResourceWithUSD(ctx *fiber.Ctx) error {
 	}
 	return handler.SendResponseWithoutMeta(ctx, messages.SuccessMessage, data.FilterResourceCurrUSDPresenter, http.StatusOK)
 }
+
+func (handler ResourceHandler) GetReportWeekResource(ctx *fiber.Ctx) error {
+	// database processing
+	uc := usecase.NewResourceUseCase(handler.Contract)
+	data, err := uc.ReportWeekResouce()
+	if err != nil {
+		return handler.SendResponseWithoutMeta(ctx, err.Error(), nil, http.StatusUnprocessableEntity)
+	}
+	return handler.SendResponseWithoutMeta(ctx, messages.SuccessMessage, data.ReportResourcePresenter, http.StatusOK)
+}

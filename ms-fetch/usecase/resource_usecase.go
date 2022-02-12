@@ -23,7 +23,6 @@ func (uc ResourceUseCase) ReadResouce() (presenter presenters.ArrayFilterResourc
 	}
 
 	presenter = presenters.NewArrayFilterResourcePresenter().Build(data)
-
 	return presenter, err
 }
 
@@ -49,12 +48,21 @@ func (uc ResourceUseCase) ReadResouceUsingCurrUSD() (presenter presenters.ArrayF
 
 		//save ke cache setelah mendapatkan result
 		repoCacheCurrConv.SetIDRtoUSD(dataUSD)
-
 	} else {
 		fmt.Println("Berhasil ambil dari cache")
 	}
 
 	presenter = presenters.NewArrayFilterResourceCurrUSDPresenter().Build(dataUSD, data)
+	return presenter, err
+}
 
+func (uc ResourceUseCase) ReportWeekResouce() (presenter presenters.ArrayReportResourcePresenter, err error) {
+	repo := repositories.NewRestEfiseryRepo(uc.Host.Efisery)
+	data, err := repo.GetResource()
+	if err != nil {
+		return presenter, err
+	}
+
+	presenter = presenters.NewArrayReportResourcePresenter().Build(data)
 	return presenter, err
 }

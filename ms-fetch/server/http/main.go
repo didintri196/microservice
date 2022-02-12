@@ -26,7 +26,9 @@ func main() {
 			CurrConv string
 		}{Efisery: config.HostEfisery, CurrConv: config.HostCurrConv},
 		Apikey: struct{ CurrConv string }{CurrConv: config.ApikeyCurrConv},
-	}) // Register routes
+	})
+
+	// Register routes
 	router.NewRouter(handler).RegisterRoutes()
 
 	// Listening Http
