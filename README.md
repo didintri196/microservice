@@ -5,7 +5,7 @@ Gabungan service dari bahasa pemograman go, nodejs
 
 ## Demo API
 
-ms-auth  : [https://lab.integrasi.in/auth](https://lab.integrasi.in/auth) 
+ms-auth  : [https://lab.integrasi.in/user](https://lab.integrasi.in/user) 
 
 ms-fetch : [https://lab.integrasi.in/fetch](https://lab.integrasi.in/fetch)
 
